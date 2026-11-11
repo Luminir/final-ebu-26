@@ -1,6 +1,7 @@
 import { cartCount, getState, update, subscribe, log } from './lib/store.js';
 import { productById } from './lib/catalogue.js';
 import { setQty } from './lib/engine.js';
+import { getTodayLunarSummary } from './lib/lunar.js';
 import './styles/main.css';
 
 export const esc = (s) =>
@@ -24,18 +25,39 @@ export function mountLayout(active) {
       `<link id="kt-vn-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap&subset=vietnamese">`
     );
   }
+  if (!document.querySelector('link[rel="icon"]')) {
+    document.head.insertAdjacentHTML('beforeend', `<link rel="icon" type="image/png" href="/kinh-tam-logo.png">`);
+  }
+
+  const todaySummary = getTodayLunarSummary();
+  const dayNames = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+  const todayDayOfWeek = dayNames[new Date().getDay()];
+  const solarDateStr = `${todaySummary.solar.day}/${todaySummary.solar.month}/${todaySummary.solar.year}`;
+  const lunarDateStr = `${todaySummary.lunar.day}/${todaySummary.lunar.month}${todaySummary.lunar.leap ? ' (nhuận)' : ''} (${todaySummary.canChiYear})`;
+  const upcomingMsg = todaySummary.upcoming
+    ? todaySummary.upcoming.daysAway === 0
+      ? `· 🌕 <strong>Hôm nay: ${todaySummary.upcoming.title}</strong>`
+      : todaySummary.upcoming.daysAway === 1
+      ? `· 🌕 <strong>Ngày mai: ${todaySummary.upcoming.title}</strong>`
+      : `· 🌕 Sắp tới: <strong>${todaySummary.upcoming.title}</strong> (còn ${todaySummary.upcoming.daysAway} ngày)`
+    : '';
 
   document.body.insertAdjacentHTML(
     'afterbegin',
     `
   <a class="skip" href="#app">Bỏ qua điều hướng</a>
   <div class="topbar">
-    Dự án sinh viên E-Business · Đơn hàng thử nghiệm (không thu tiền thật)
+    <div class="wrap topbar-inner">
+      <span class="topbar-lunar">
+        📅 ${todayDayOfWeek}, ${solarDateStr} · Âm lịch: <strong>${lunarDateStr}</strong> ${upcomingMsg}
+      </span>
+      <span class="hide-sm topbar-note">Dự án sinh viên E-Business (thử nghiệm)</span>
+    </div>
   </div>
   <header class="header">
     <div class="wrap nav">
       <a class="brand" href="index.html">
-        <span class="brand-badge" aria-hidden="true">🪷</span>
+        <img src="/kinh-tam-logo.png" alt="Kính Tâm Logo" class="brand-logo-img">
         <span class="logo">Kính Tâm<small>Chuẩn lễ · Đúng dịp · Trọn tâm</small></span>
       </a>
       <nav class="navlinks" aria-label="Điều hướng chính">
@@ -65,7 +87,10 @@ export function mountLayout(active) {
   <footer class="footer">
     <div class="wrap footer-grid">
       <div>
-        <strong class="logo" style="font-size:21px">Kính Tâm</strong>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <img src="/kinh-tam-logo.png" alt="Kính Tâm" class="footer-logo-img">
+          <strong class="logo" style="font-size:22px">Kính Tâm</strong>
+        </div>
         <p class="muted" style="max-width:380px;margin:6px 0 0">
           Chuẩn bị lễ vật theo dịp từ những gì gia đình đã có sẵn — gọn nhẹ, minh bạch và vừa vặn ngân sách.
         </p>

@@ -15,7 +15,7 @@ const today = () =>
   new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 
 function field(id, label, type, value, extra = '') {
-  return `<div class="field"><label for="${id}">${label}</label><input id="${id}" name="${id}" type="${type}" value="${esc(value)}" ${extra}><span class="err" id="e-${id}"></span></div>`;
+  return `<div class="field"><label for="${id}">${label}</label><input id="${id}" name="${id}" type="${type}" value="${esc(value)}" ${extra}><span class="err" id="e-${id}"></span>${id === 'date' ? '<span class="muted" id="dateLunarHint" style="font-size:12.5px;margin-top:2px"></span>' : ''}</div>`;
 }
 
 function formView() {
@@ -167,6 +167,22 @@ function render() {
 
   const f = $('#f');
   if (!f) return;
+
+  const updateLunarDateHint = () => {
+    const el = $('#date');
+    const hint = $('#dateLunarHint');
+    if (!el || !hint) return;
+    const v = el.value;
+    if (!v) { hint.textContent = ''; return; }
+    const [y, m, d] = v.split('-').map(Number);
+    if (!y) return;
+    const lun = solarToLunar(d, m, y);
+    hint.textContent = `📅 Tức ngày ${lun.day}/${lun.month}${lun.leap ? ' (nhuận)' : ''}/${lun.year} Âm lịch`;
+  };
+  $('#date')?.addEventListener('change', updateLunarDateHint);
+  $('#date')?.addEventListener('input', updateLunarDateHint);
+  updateLunarDateHint();
+
   f.addEventListener('submit', (e) => {
     e.preventDefault();
     const { v, err } = validate();

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { recommend, budgetStatus, setQty, subtotal } from '../src/lib/engine.js';
 import { templateComparison } from '../src/lib/catalogue.js';
 import { parseNeed, parseMoney, AI_TEST_CASES } from '../src/lib/aiParser.js';
-import { lunarToSolar, solarToLunar, nextOccurrence } from '../src/lib/lunar.js';
+import { lunarToSolar, solarToLunar, nextOccurrence, getCanChiYear, getCanChiDay, getUpcomingSpecialDay, getMonthCalendarGrid } from '../src/lib/lunar.js';
 import { buildICS } from '../src/lib/ics.js';
 import { KinhTamDB, initDB } from '../src/lib/db.js';
 import { applyScenario, getState, resetAll } from '../src/lib/store.js';
@@ -109,6 +109,20 @@ describe('lunar & ics (Scenario B)', () => {
     expect(s).toContain('DTEND;VALUE=DATE:20250904');
     expect(s).toContain('TRIGGER:-P7D');
     expect(s).not.toContain('RRULE');
+  });
+  it('computes Can Chi for years accurately', () => {
+    expect(getCanChiYear(2024)).toBe('Giáp Thìn');
+    expect(getCanChiYear(2025)).toBe('Ất Tỵ');
+    expect(getCanChiYear(2026)).toBe('Bính Ngọ');
+  });
+  it('generates a full monthly calendar grid with Mung 1 and Ram', () => {
+    const grid = getMonthCalendarGrid(2024, 2);
+    expect(grid.length % 7).toBe(0);
+    const mung1 = grid.find((d) => d.solarYear === 2024 && d.solarMonth === 2 && d.solarDay === 10);
+    expect(mung1).toBeDefined();
+    expect(mung1.isMung1).toBe(true);
+    expect(mung1.lunarDay).toBe(1);
+    expect(mung1.lunarMonth).toBe(1);
   });
 });
 

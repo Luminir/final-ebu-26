@@ -171,3 +171,137 @@ export function nextOccurrence(ev, from = new Date()) {
   }
   return null;
 }
+
+export const CAN = ['Giáp', 'Ất', 'Bính', 'Đinh', 'Mậu', 'Kỷ', 'Canh', 'Tân', 'Nhâm', 'Quý'];
+export const CHI = ['Tý', 'Sửu', 'Dần', 'Mão', 'Thìn', 'Tỵ', 'Ngọ', 'Mùi', 'Thân', 'Dậu', 'Tuất', 'Hợi'];
+
+export function getCanChiYear(lunarYear) {
+  const can = CAN[((lunarYear + 6) % 10 + 10) % 10];
+  const chi = CHI[((lunarYear + 8) % 12 + 12) % 12];
+  return `${can} ${chi}`;
+}
+
+export function getCanChiDay(dd, mm, yy) {
+  const jd = jdFromDate(dd, mm, yy);
+  const can = CAN[((jd + 9) % 10 + 10) % 10];
+  const chi = CHI[((jd + 1) % 12 + 12) % 12];
+  return `${can} ${chi}`;
+}
+
+export function getTodayLunarSummary(from = new Date()) {
+  const d = from.getDate();
+  const m = from.getMonth() + 1;
+  const y = from.getFullYear();
+  const l = solarToLunar(d, m, y);
+  const canChiYear = getCanChiYear(l.year);
+  const canChiDay = getCanChiDay(d, m, y);
+  const upcoming = getUpcomingSpecialDay(from);
+  return {
+    solar: { day: d, month: m, year: y },
+    lunar: l,
+    canChiYear,
+    canChiDay,
+    upcoming,
+  };
+}
+
+export function getUpcomingSpecialDay(from = new Date()) {
+  const today = startOfDay(from);
+  for (let i = 0; i <= 35; i++) {
+    const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() + i);
+    const l = solarToLunar(d.getDate(), d.getMonth() + 1, d.getFullYear());
+    if (l.day === 1) {
+      return {
+        type: 'mung1',
+        title: `Mùng 1 tháng ${l.month}${l.leap ? ' (nhuận)' : ''}`,
+        solarDate: d,
+        lunar: l,
+        daysAway: i,
+      };
+    }
+    if (l.day === 15) {
+      return {
+        type: 'ram',
+        title: `Rằm tháng ${l.month}${l.leap ? ' (nhuận)' : ''}`,
+        solarDate: d,
+        lunar: l,
+        daysAway: i,
+      };
+    }
+  }
+  return null;
+}
+
+export function getMonthCalendarGrid(year, month) {
+  const firstDay = new Date(year, month - 1, 1);
+  const lastDay = new Date(year, month, 0);
+  const totalDays = lastDay.getDate();
+
+  let startDayOfWeek = (firstDay.getDay() + 6) % 7;
+  const days = [];
+
+  const prevMonthLastDay = new Date(year, month - 1, 0).getDate();
+  for (let i = startDayOfWeek - 1; i >= 0; i--) {
+    const d = prevMonthLastDay - i;
+    const prevDate = new Date(year, month - 2, d);
+    const l = solarToLunar(prevDate.getDate(), prevDate.getMonth() + 1, prevDate.getFullYear());
+    days.push({
+      solarDay: d,
+      solarMonth: prevDate.getMonth() + 1,
+      solarYear: prevDate.getFullYear(),
+      lunarDay: l.day,
+      lunarMonth: l.month,
+      lunarYear: l.year,
+      leap: l.leap,
+      isCurrentMonth: false,
+      isToday: false,
+      isMung1: l.day === 1,
+      isRam: l.day === 15,
+      dateString: `${prevDate.getFullYear()}-${String(prevDate.getMonth() + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`,
+    });
+  }
+
+  const now = new Date();
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+  for (let d = 1; d <= totalDays; d++) {
+    const l = solarToLunar(d, month, year);
+    const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    days.push({
+      solarDay: d,
+      solarMonth: month,
+      solarYear: year,
+      lunarDay: l.day,
+      lunarMonth: l.month,
+      lunarYear: l.year,
+      leap: l.leap,
+      isCurrentMonth: true,
+      isToday: dateStr === todayStr,
+      isMung1: l.day === 1,
+      isRam: l.day === 15,
+      dateString: dateStr,
+    });
+  }
+
+  const remaining = (7 - (days.length % 7)) % 7;
+  for (let d = 1; d <= remaining; d++) {
+    const nextDate = new Date(year, month, d);
+    const l = solarToLunar(nextDate.getDate(), nextDate.getMonth() + 1, nextDate.getFullYear());
+    days.push({
+      solarDay: d,
+      solarMonth: nextDate.getMonth() + 1,
+      solarYear: nextDate.getFullYear(),
+      lunarDay: l.day,
+      lunarMonth: l.month,
+      lunarYear: l.year,
+      leap: l.leap,
+      isCurrentMonth: false,
+      isToday: false,
+      isMung1: l.day === 1,
+      isRam: l.day === 15,
+      dateString: `${nextDate.getFullYear()}-${String(nextDate.getMonth() + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`,
+    });
+  }
+
+  return days;
+}
