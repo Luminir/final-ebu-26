@@ -115,10 +115,8 @@ function render() {
             </div>
           </div>
           <label class="check-item" id="leapRow" style="margin-bottom:12px;padding:9px 12px">
-            <div class="check-item-left">
-              <input id="leap" type="checkbox" ${val.leap ? 'checked' : ''}>
-              <span>Tháng nhuận</span>
-            </div>
+            <input id="leap" type="checkbox" ${val.leap ? 'checked' : ''}>
+            <span class="check-item-text">Tháng nhuận</span>
           </label>
           <div class="field">
             <label for="remind">Nhắc trước</label>

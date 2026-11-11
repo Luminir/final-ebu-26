@@ -95,13 +95,11 @@ function step2(s) {
         .map(
           (p) => `
         <label class="check-item ${s.inventory.includes(p.id) ? 'checked' : ''}">
-          <div class="check-item-left">
-            <input type="checkbox" data-own="${p.id}" ${s.inventory.includes(p.id) ? 'checked' : ''}>
-            <span class="emoji">${p.emoji}</span>
-            <div>
-              <strong>${esc(p.name)}</strong>
-              <div class="muted" style="font-size:12.5px">${esc(p.unit)}</div>
-            </div>
+          <input type="checkbox" data-own="${p.id}" ${s.inventory.includes(p.id) ? 'checked' : ''}>
+          <span class="emoji">${p.emoji}</span>
+          <div class="check-item-text">
+            <strong>${esc(p.name)}</strong>
+            <div class="muted" style="font-size:12.5px">${esc(p.unit)}</div>
           </div>
         </label>`
         )

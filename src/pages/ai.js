@@ -104,12 +104,10 @@ function confirmCard() {
           .map(productById)
           .map(
             (p) => `
-          <label class="check-item ${parsed.inventory.includes(p.id) ? 'checked' : ''}" style="padding:9px 12px">
-            <div class="check-item-left">
-              <input class="aiOwn" type="checkbox" value="${p.id}" ${parsed.inventory.includes(p.id) ? 'checked' : ''}>
-              <span class="emoji" style="font-size:20px">${p.emoji}</span>
-              <strong>${esc(p.name)}</strong>
-            </div>
+          <label class="check-item ${parsed.inventory.includes(p.id) ? 'checked' : ''}">
+            <input class="aiOwn" type="checkbox" value="${p.id}" ${parsed.inventory.includes(p.id) ? 'checked' : ''}>
+            <span class="emoji">${p.emoji}</span>
+            <div class="check-item-text"><strong>${esc(p.name)}</strong></div>
           </label>`
           )
           .join('')}

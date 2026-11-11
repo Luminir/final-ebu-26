@@ -137,12 +137,14 @@ a{text-decoration:none;color:inherit}
 .mode-card b{font-size:22px;display:block;margin-bottom:4px;color:var(--green)}
 .mode-card h3{margin:0 0 4px;font-size:16px}.mode-card p{margin:0;color:var(--muted);font-size:13.5px}
 .check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
-.check-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:16px;padding:12px 14px;background:#fff;cursor:pointer;transition:.12s}
+.check-item{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:16px;padding:12px 14px;background:#fff;cursor:pointer;transition:.12s;box-sizing:border-box;width:100%;user-select:none}
 .check-item:hover{border-color:#a5bfb0}
-.check-item-left{display:flex;align-items:center;gap:11px}
-.check-item input{width:19px;height:19px;accent-color:var(--green);flex-shrink:0}
 .check-item.checked{background:#edf6ee;border-color:#8eb89c}
-.check-item .emoji{font-size:24px}
+.check-item-left{display:flex;align-items:center;gap:11px;flex:1;min-width:0}
+.check-item input[type="checkbox"],.check-item input{width:18px!important;min-width:18px!important;max-width:18px!important;height:18px!important;accent-color:var(--green);flex:0 0 18px;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;cursor:pointer}
+.check-item .emoji{font-size:24px;line-height:1;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center}
+.check-item .check-item-text,.check-item>div:not(.check-item-left){flex:1 1 auto;min-width:0;word-break:break-word}
+.check-item strong{display:block;font-size:14px;line-height:1.35}
 .tpl-badge{font-size:11px;padding:2px 8px;border-radius:999px;background:#eef3ee;color:var(--green);font-weight:600;white-space:nowrap}
 
 /* Dual Tray Layout in Step 3 & Cart */
@@ -195,14 +197,14 @@ a{text-decoration:none;color:inherit}
 .footer-actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
 .field label,.field .lbl{font-weight:700;font-size:13px}
-.field input,.field select,.field textarea{width:100%;padding:11px 13px;border-radius:13px;border:1px solid #ced8ce;background:#fff}
+.field input:not([type="checkbox"]):not([type="radio"]),.field select,.field textarea{width:100%;padding:11px 13px;border-radius:13px;border:1px solid #ced8ce;background:#fff}
 .field textarea{min-height:104px;resize:vertical}
 .field .err{color:var(--danger);font-size:12px;font-weight:600}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .empty{padding:26px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px;background:var(--surface-warm)}
 .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{border:1px solid var(--line);background:#fff;padding:6px 12px;border-radius:999px;font-size:13px}
+.chip{border:1px solid var(--line);background:#fff;padding:6px 12px;border-radius:999px;font-size:13px;max-width:100%;text-align:left;white-space:normal;line-height:1.4}
 .calendar-item{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;flex-wrap:wrap;background:#fff}
 .dual-date-box{background:var(--surface-2);border:1px solid #cde0d1;border-radius:12px;padding:9px 12px;margin-top:8px;font-size:13px}
 .score{display:flex;gap:8px;margin:8px 0}
@@ -251,6 +253,7 @@ a{text-decoration:none;color:inherit}
   .hero-grid,.shop-layout,.ai-grid,.detail,.compare-grid,.modal-product-grid,.db-inspector{grid-template-columns:1fr}
   .card-grid,.trust,.metric-grid{grid-template-columns:repeat(2,1fr)}
   .card-grid-3,.mode-row,.steps3,.tray-comparison-banner{grid-template-columns:1fr}
+  .check-grid{grid-template-columns:1fr}
   .stepbar{grid-template-columns:repeat(2,1fr)}
   .order-box{position:static}
   .nav{flex-wrap:wrap;padding:10px 0}
@@ -265,4 +268,8 @@ a{text-decoration:none;color:inherit}
   .product-row{grid-template-columns:44px 1fr}
   .product-row .price-col{grid-column:2;text-align:left}
   .logo{font-size:21px}.logo small,.hide-sm{display:none}
+  .inline-actions{flex-direction:column;align-items:stretch}
+  .inline-actions .btn{width:100%}
+  .chips{flex-direction:column;align-items:stretch}
+  .chips .chip{width:100%;border-radius:14px;padding:8px 12px}
 }
