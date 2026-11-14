@@ -3,7 +3,7 @@ import { occasions, slots, templateComparison } from '../lib/catalogue.js';
 import { getState, update, log, modeLabel } from '../lib/store.js';
 import { subtotal } from '../lib/engine.js';
 import { solarToLunar } from '../lib/lunar.js';
-import { orderSummary } from '../components.js';
+import { orderSummary, SHIPPING_FEE, FREESHIP_THRESHOLD } from '../components.js';
 
 mountLayout('shop');
 
@@ -95,7 +95,10 @@ function successView() {
     <div class="card" style="margin:18px auto;text-align:left">
       <div class="summary-line"><span>Dịp lễ</span><strong>${esc(o.label)}</strong></div>
       <div class="summary-line"><span>Số món đặt mua</span><strong>${o.items.reduce((a, b) => a + b.qty, 0)} món</strong></div>
-      <div class="summary-line"><span>Tổng tiền</span><strong class="price">${VND(o.total)}</strong></div>
+      <div class="summary-line"><span>Tiền lễ vật</span><strong>${VND(o.subtotal || o.total)}</strong></div>
+      <div class="summary-line"><span>Phí giao hàng</span><strong>${o.shippingFee === 0 ? '<span style="color:var(--green);font-weight:700">Miễn phí</span>' : '+' + VND(o.shippingFee || 0)}</strong></div>
+      <div class="summary-divider"></div>
+      <div class="summary-line"><span>Tổng thanh toán</span><strong class="price" style="font-size:18px;color:var(--green)">${VND(o.total)}</strong></div>
       <div class="summary-line"><span>Khung giờ giao</span><strong>${esc(o.delivery.date)} · ${esc(o.delivery.slot)}</strong></div>
     </div>
 
@@ -206,6 +209,8 @@ function render() {
     const s = getState();
     const cmp = templateComparison(s.occasion, s.mode, s.inventory);
     const durationMs = Math.max(12000, Date.now() - (s.startedAt || Date.now() - 85000));
+    const rawSubtotal = subtotal(s.cart);
+    const shippingFee = rawSubtotal >= FREESHIP_THRESHOLD || rawSubtotal === 0 ? 0 : SHIPPING_FEE;
 
     done = {
       id: 'KT-' + Date.now().toString().slice(-6),
@@ -215,7 +220,9 @@ function render() {
       label: modeLabel(),
       inventory: [...s.inventory],
       items: s.cart.map((c) => ({ ...c })),
-      total: subtotal(s.cart),
+      subtotal: rawSubtotal,
+      shippingFee,
+      total: rawSubtotal + shippingFee,
       savedAmount: cmp.ownedSavings,
       budget: s.budget,
       timeOnTaskMs: durationMs,

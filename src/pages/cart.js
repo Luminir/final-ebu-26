@@ -2,13 +2,15 @@ import { mountLayout, VND, esc, $, $$ } from '../layout.js';
 import { productById } from '../lib/catalogue.js';
 import { getState, update, cartCount, modeLabel, ownedNames } from '../lib/store.js';
 import { setQty, budgetStatus } from '../lib/engine.js';
-import { orderSummary } from '../components.js';
+import { orderSummary, SHIPPING_FEE, FREESHIP_THRESHOLD } from '../components.js';
 
 mountLayout('shop');
 
 function render() {
   const s = getState();
   const b = budgetStatus(s.cart, s.budget);
+  const shippingFee = b.total >= FREESHIP_THRESHOLD || b.total === 0 ? 0 : SHIPPING_FEE;
+  const grandTotal = b.total + shippingFee;
 
   $('#app').innerHTML = `<section class="shop-shell"><div class="wrap shop-layout">
     <div class="panel">
@@ -67,7 +69,19 @@ function render() {
       </div>
     </div>
     ${orderSummary({ cta: false })}
-  </div></section>`;
+  </div>
+  ${
+    s.cart.length
+      ? `<div class="mobile-sticky-checkout">
+          <div>
+            <div class="muted" style="font-size:11px">Tổng cộng:</div>
+            <div class="price" style="font-size:17px;color:var(--green)">${VND(grandTotal)}</div>
+          </div>
+          <a class="btn small" href="thanh-toan.html">Checkout ngay →</a>
+        </div>`
+      : ''
+  }
+  </section>`;
 
   $$('[data-qty]').forEach((x) =>
     x.addEventListener('click', () => {
