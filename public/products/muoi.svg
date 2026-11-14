@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgM" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f8fcff"/><stop offset="100%" stop-color="#e6f0f5"/></radialGradient>
+    <linearGradient id="pot" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ecf0f1"/><stop offset="70%" stop-color="#bdc3c7"/><stop offset="100%" stop-color="#95a5a6"/></linearGradient>
+  </defs>
+  <rect width="300" height="240" rx="16" fill="url(#bgM)"/>
+  <!-- Shadow & Ceramic Cup -->
+  <ellipse cx="150" cy="185" rx="60" ry="14" fill="rgba(0,0,0,0.1)"/>
+  <path d="M105 120 C100 170 115 180 150 180 C185 180 200 170 195 120 Z" fill="url(#pot)"/>
+  <!-- Pure Salt mound -->
+  <path d="M105 120 Q150 80 195 120 Z" fill="#ffffff" stroke="#d2dae2" stroke-width="1.5"/>
+  <!-- Salt crystals sparkling -->
+  <g fill="#3498db" opacity="0.6">
+    <circle cx="140" cy="108" r="1.5"/>
+    <circle cx="155" cy="102" r="2"/>
+    <circle cx="165" cy="112" r="1.5"/>
+    <circle cx="130" cy="116" r="1.5"/>
+  </g>
+  <!-- Wooden Spoon -->
+  <path d="M165 110 L210 160 C215 166 220 160 216 155 L175 105 Z" fill="#c79c60"/>
+  <text x="150" y="228" font-family="'Be Vietnam Pro',sans-serif" font-size="12" font-weight="700" fill="#2d4a3e" text-anchor="middle">Muối Hạt Tinh Khiết Trừ Tà</text>
+</svg>

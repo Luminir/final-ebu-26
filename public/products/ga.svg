@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGa" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffcf5"/><stop offset="100%" stop-color="#f7ebd7"/></radialGradient>
+    <radialGradient id="skin" cx="40%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffe082"/><stop offset="60%" stop-color="#ffb300"/><stop offset="100%" stop-color="#e65100"/></radialGradient>
+    <linearGradient id="plateGa" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#e0e0e0"/></linearGradient>
+  </defs>
+  <rect width="300" height="240" rx="16" fill="url(#bgGa)"/>
+  <!-- Plate -->
+  <ellipse cx="150" cy="185" rx="90" ry="24" fill="rgba(0,0,0,0.14)"/>
+  <ellipse cx="150" cy="180" rx="85" ry="20" fill="url(#plateGa)" stroke="#dcdde1" stroke-width="2"/>
+  <!-- Rooster Body (Golden boiled chicken) -->
+  <path d="M100 155 C90 120 120 90 165 95 C195 100 205 130 195 160 C170 175 120 175 100 155 Z" fill="url(#skin)"/>
+  <!-- Wing (Cánh tiên) -->
+  <path d="M125 125 C145 105 185 115 175 145 C155 155 130 145 125 125 Z" fill="#ffa000" stroke="#ff8f00" stroke-width="1.5"/>
+  <!-- Head & Neck proudly raised -->
+  <path d="M105 140 C95 110 105 75 120 65 C130 65 130 85 125 110 Z" fill="url(#skin)"/>
+  <!-- Red Comb & Beak Rose -->
+  <path d="M118 60 Q122 50 126 62" fill="#d32f2f"/>
+  <circle cx="112" cy="72" r="5" fill="#e91e63"/>
+  <!-- Lime Leaves Shredded on Plate -->
+  <path d="M90 175 Q100 170 105 178" stroke="#2e7d32" stroke-width="2" fill="none"/>
+  <path d="M190 172 Q198 168 205 175" stroke="#2e7d32" stroke-width="2" fill="none"/>
+  <!-- Lemon Pepper Salt Cup -->
+  <circle cx="215" cy="165" r="14" fill="#ffffff" stroke="#bdbdbd"/>
+  <circle cx="215" cy="165" r="10" fill="#fff9c4"/>
+  <circle cx="215" cy="165" r="3" fill="#424242"/>
+  <text x="150" y="228" font-family="'Be Vietnam Pro',sans-serif" font-size="12" font-weight="700" fill="#2d4a3e" text-anchor="middle">Gà Ta Thả Vườn Buộc Cánh Tiên Ngậm Hoa Hồng</text>
+</svg>

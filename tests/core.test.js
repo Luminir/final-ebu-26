@@ -75,6 +75,22 @@ describe('aiParser & Vietnamese Test Suite (Scenario C)', () => {
       expect([...out.inventory].sort()).toEqual([...(tc.expect.inventory || [])].sort());
     }
   });
+  it('correctly handles 1 triệu rưỡi, 1.5 million and colloquial phrases like có hoa rồi (Feedback 5)', () => {
+    const r1 = parseNeed('mai Rằm, có hoa rồi, ngân sách 1 triệu rưỡi');
+    expect(r1.occasion).toBe('ram');
+    expect(r1.inventory).toContain('hoa');
+    expect(r1.budget_vnd).toBe(1500000);
+
+    const r2 = parseNeed('mung 1 nha co hoa voi nhang roi, budget 1.5 million');
+    expect(r2.occasion).toBe('mung1');
+    expect(r2.inventory).toEqual(expect.arrayContaining(['hoa', 'nhang']));
+    expect(r2.budget_vnd).toBe(1500000);
+
+    const r3 = parseNeed('gio ong, nha co nen voi ruou roi, ngan sach 1tr5');
+    expect(r3.occasion).toBe('gio');
+    expect(r3.inventory).toEqual(expect.arrayContaining(['nen', 'ruou']));
+    expect(r3.budget_vnd).toBe(1500000);
+  });
   it('parseMoney', () => {
     expect(parseMoney('400.000')).toBe(400000);
     expect(parseMoney('2', 'tr')).toBe(2000000);

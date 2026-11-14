@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgH" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff5f7"/><stop offset="100%" stop-color="#f8d7df"/></radialGradient>
+    <radialGradient id="goldH" cx="40%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff07c"/><stop offset="60%" stop-color="#f5a623"/><stop offset="100%" stop-color="#d47500"/></radialGradient>
+    <radialGradient id="roseH" cx="35%" cy="35%" r="65%"><stop offset="0%" stop-color="#ff85a2"/><stop offset="70%" stop-color="#e83e8c"/><stop offset="100%" stop-color="#9d164a"/></radialGradient>
+    <linearGradient id="leafH" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5fa369"/><stop offset="100%" stop-color="#245831"/></linearGradient>
+    <linearGradient id="paperH" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f5eee6"/><stop offset="100%" stop-color="#ded0c1"/></linearGradient>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity="0.18"/></filter>
+  </defs>
+  <rect width="300" height="240" rx="16" fill="url(#bgH)"/>
+  <!-- Wrap Paper -->
+  <path d="M120 120 L180 120 L165 215 L135 215 Z" fill="url(#paperH)" filter="url(#sh)"/>
+  <path d="M110 130 C120 180 135 210 140 215 C155 215 170 180 185 130 Z" fill="#ecd9c8" opacity="0.6"/>
+  <rect x="132" y="165" width="36" height="10" rx="3" fill="#c82333"/>
+  <!-- Green Leaves -->
+  <path d="M85 105 C70 85 90 60 115 75 C100 95 90 100 85 105 Z" fill="url(#leafH)"/>
+  <path d="M215 105 C230 85 210 60 185 75 C200 95 210 100 215 105 Z" fill="url(#leafH)"/>
+  <path d="M140 60 C125 35 155 20 170 45 C155 55 145 58 140 60 Z" fill="url(#leafH)"/>
+  <!-- Chrysanthemums & Roses -->
+  <!-- Left Yellow Mum -->
+  <circle cx="105" cy="85" r="30" fill="url(#goldH)" filter="url(#sh)"/>
+  <circle cx="105" cy="85" r="20" fill="#f8b739"/>
+  <circle cx="105" cy="85" r="10" fill="#d97706"/>
+  <!-- Right Yellow Mum -->
+  <circle cx="195" cy="85" r="30" fill="url(#goldH)" filter="url(#sh)"/>
+  <circle cx="195" cy="85" r="20" fill="#f8b739"/>
+  <circle cx="195" cy="85" r="10" fill="#d97706"/>
+  <!-- Center Main Pink Rose -->
+  <circle cx="150" cy="80" r="36" fill="url(#roseH)" filter="url(#sh)"/>
+  <circle cx="150" cy="80" r="24" fill="#ff6b8b"/>
+  <circle cx="150" cy="80" r="12" fill="#c2185b"/>
+  <path d="M140 75 Q150 65 160 75 Q155 85 140 75" fill="#f06292"/>
+  <!-- Top Center Yellow -->
+  <circle cx="150" cy="40" r="22" fill="url(#goldH)" filter="url(#sh)"/>
+  <circle cx="150" cy="40" r="12" fill="#d97706"/>
+  <text x="150" y="232" font-family="'Be Vietnam Pro',sans-serif" font-size="12" font-weight="700" fill="#2d4a3e" text-anchor="middle">Hoa Cúc &amp; Hoa Hồng Tươi Thắm</text>
+</svg>

@@ -70,11 +70,15 @@ export function orderSummary({ cta = true } = {}) {
 export const ownedList = () => ownedNames().join(', ') || 'Chưa chọn món nào';
 
 export function renderProductVisual(p, size = 'md') {
-  const h = size === 'lg' ? 210 : size === 'sm' ? 48 : 110;
+  const h = size === 'lg' ? 210 : size === 'sm' ? 48 : 120;
   const fs = size === 'lg' ? 72 : size === 'sm' ? 22 : 42;
+  const content = p.image
+    ? `<img src="${p.image}" alt="${esc(p.name)}" class="prod-img" style="height:${h}px;width:100%;object-fit:cover;border-radius:14px;display:block">`
+    : `<span class="prod-emoji" style="font-size:${fs}px" aria-hidden="true">${p.emoji}</span>`;
+
   return `
-    <div class="prod-svg-wrap" style="height:${h}px;background:radial-gradient(circle at 30% 25%, #ffffff 0%, ${p.tone} 85%);border:1px solid rgba(41,83,62,0.08)">
-      <span class="prod-emoji" style="font-size:${fs}px" aria-hidden="true">${p.emoji}</span>
+    <div class="prod-svg-wrap" style="height:${h}px;background:radial-gradient(circle at 30% 25%, #ffffff 0%, ${p.tone} 85%);border:1px solid rgba(41,83,62,0.08);overflow:hidden;display:flex;align-items:center;justify-content:center;border-radius:14px">
+      ${content}
     </div>
   `;
 }

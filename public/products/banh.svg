@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgB" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffdf8"/><stop offset="100%" stop-color="#fdf2e2"/></radialGradient>
+    <linearGradient id="mungCake" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffe082"/><stop offset="100%" stop-color="#ffb300"/></linearGradient>
+  </defs>
+  <rect width="300" height="240" rx="16" fill="url(#bgB)"/>
+  <!-- Box Base -->
+  <ellipse cx="150" cy="185" rx="75" ry="16" fill="rgba(0,0,0,0.1)"/>
+  <rect x="90" y="110" width="120" height="65" rx="6" fill="#f9ebd2" stroke="#e0cbab"/>
+  <!-- 6 Mung bean cake cubes wrapped in gold foil -->
+  <g fill="url(#mungCake)" stroke="#d4a373" stroke-width="1">
+    <rect x="105" y="120" width="24" height="20" rx="2"/>
+    <rect x="138" y="120" width="24" height="20" rx="2"/>
+    <rect x="171" y="120" width="24" height="20" rx="2"/>
+    <rect x="105" y="145" width="24" height="20" rx="2"/>
+    <rect x="138" y="145" width="24" height="20" rx="2"/>
+    <rect x="171" y="145" width="24" height="20" rx="2"/>
+  </g>
+  <text x="150" y="228" font-family="'Be Vietnam Pro',sans-serif" font-size="12" font-weight="700" fill="#2d4a3e" text-anchor="middle">Hộp Bánh Đậu Xanh Rồng Vàng Thơm Ngọt</text>
+</svg>

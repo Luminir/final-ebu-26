@@ -28,7 +28,7 @@ export function parseMoney(raw, suffix = '') {
   else n = parseFloat(s.replace(',', '.'));
   if (!Number.isFinite(n)) return 0;
   const suf = suffix.toLowerCase();
-  if (/^(tr|trieu)$/.test(suf)) return Math.round(n * 1000000);
+  if (/^(tr|trieu|million|mil|m)$/.test(suf)) return Math.round(n * 1000000);
   if (/^(k|nghin|ngan)$/.test(suf)) return Math.round(n * 1000);
   return Math.round(n);
 }
@@ -50,24 +50,45 @@ function detectMode(plain) {
 
 function detectInventory(plain) {
   if (/\b(chua co do|chua co gi|khong co gi)\b/.test(plain)) return [];
-  const m = plain.match(/(?:\bda co\b|\bnha da co\b|\bnha co\b|\bco san\b|\bcon\b)(.*)/);
-  if (!m) return [];
-  let seg = m[1].split(/\b(?:ngan sach|budget|toi da|khoang|duoi|trong tam|giao|nhan hang)\b/)[0];
-  const found = [];
+  const found = new Set();
   const orderedKeys = ['trai', 'hoa', 'nhang', 'nen', 'gao', 'muoi', 'xoi', 'che', 'ga', 'rung', 'ruou', 'tra', 'vang'];
+
+  const m = plain.match(/(?:\bda co\b|\bnha da co\b|\bnha minh co\b|\bminh co\b|\bnha co\b|\bco san\b|\bsan co\b|\bco\b|\bcon\b)(.*)/);
+  let seg = m ? m[1].split(/\b(?:ngan sach|budget|toi da|khoang|duoi|trong tam|giao|nhan hang)\b/)[0] : '';
+
   for (const id of orderedKeys) {
-    const re = new RegExp(`\\b(${ITEM_TERMS[id].join('|')})\\b`);
-    if (re.test(seg)) {
-      found.push(id);
-      if (id === 'trai') seg = seg.replace(/trai cay|hoa qua|ngu qua/g, ' '); // avoid "hoa qua" => hoa
+    for (const term of ITEM_TERMS[id]) {
+      const reInSeg = new RegExp(`\\b${term}\\b`);
+      const reWithRoi = new RegExp(`\\b(?:co|da co|san co)\\s+[^.,]*?\\b${term}\\b|\\b${term}\\b[^.,]*?\\b(?:co roi|roi|co san)\\b`);
+      if ((seg && reInSeg.test(seg)) || reWithRoi.test(plain)) {
+        found.add(id);
+        break;
+      }
     }
   }
-  return found;
+
+  // Guardrail: if 'trai' was matched from 'hoa qua', don't accidentally match 'hoa' unless 'hoa' appears separately
+  if (found.has('trai') && found.has('hoa')) {
+    const withoutTrai = plain.replace(/trai cay|hoa qua|ngu qua/g, ' ');
+    if (!/\b(hoa|hoa tuoi|hoa cung)\b/.test(withoutTrai)) {
+      found.delete('hoa');
+    }
+  }
+
+  return [...found];
 }
 
 function detectBudget(plain) {
-  const near = plain.match(/(?:ngan sach|budget|toi da|khoang|duoi|tam)\D{0,15}(\d+(?:[.,]\d+)*)\s*(k|nghin|ngan|tr|trieu|d|dong|vnd)?\b/);
-  const any = plain.match(/(\d+(?:[.,]\d+)*)\s*(k|nghin|ngan|tr|trieu|dong|vnd)\b/);
+  // Case 1: "1 triệu rưỡi", "2 trieu ruoi", "1tr5", "1 trieu 5"
+  const ruoiMatch = plain.match(/(\d+(?:[.,]\d+)?)\s*(?:tr|trieu|million)\s*(?:ruoi|500k|500|5\b)/);
+  if (ruoiMatch) {
+    const base = parseFloat(ruoiMatch[1].replace(',', '.'));
+    return Math.round(base * 1000000 + 500000);
+  }
+
+  // Case 2: Standard matching with near or any keywords
+  const near = plain.match(/(?:ngan sach|budget|toi da|khoang|duoi|tam)\D{0,15}(\d+(?:[.,]\d+)*)\s*(k|nghin|ngan|tr|trieu|million|mil|m|d|dong|vnd)?\b/);
+  const any = plain.match(/(\d+(?:[.,]\d+)*)\s*(k|nghin|ngan|tr|trieu|million|mil|m|dong|vnd)\b/);
   const m = near || any;
   if (!m) return 0;
   let v = parseMoney(m[1], m[2] || '');

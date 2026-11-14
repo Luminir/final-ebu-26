@@ -22,6 +22,7 @@ function formView() {
   const s = getState();
   const d = s.delivery;
   const prof = s.profile || {};
+  const u = s.currentUser;
 
   if (!s.cart.length) {
     return `<div class="panel">
@@ -35,12 +36,20 @@ function formView() {
     <h2 style="margin-top:8px">Thông tin nhận hàng</h2>
     <div class="panel-intro">Đơn hàng thử nghiệm cho dự án E-Business — không thu tiền thật.</div>
 
+    ${
+      u
+        ? `<div style="background:#eef6ef;border:1px solid #c2dec7;border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:13.5px;color:var(--green)">
+            ✓ Đã đăng nhập với tư cách: <strong>${esc(u.name)}</strong> (${esc(u.email)}). Thông tin nhận hàng đã được tự động điền.
+          </div>`
+        : ''
+    }
+
     <form id="f" novalidate>
       <div class="field-row">
-        ${field('name', 'Họ và tên', 'text', d.name || prof.displayName || '', 'autocomplete="name"')}
-        ${field('phone', 'Số điện thoại', 'tel', d.phone || '0912345678', 'autocomplete="tel" placeholder="09xxxxxxxx"')}
+        ${field('name', 'Họ và tên', 'text', d.name || u?.name || prof.displayName || '', 'autocomplete="name"')}
+        ${field('phone', 'Số điện thoại', 'tel', d.phone || u?.phone || '0912345678', 'autocomplete="tel" placeholder="09xxxxxxxx"')}
       </div>
-      ${field('address', 'Địa chỉ nhận hàng', 'text', d.address || prof.defaultDistrict || '', 'autocomplete="street-address"')}
+      ${field('address', 'Địa chỉ nhận hàng', 'text', d.address || u?.address || prof.defaultDistrict || '', 'autocomplete="street-address"')}
       <div class="field-row">
         ${field('date', 'Ngày nhận', 'date', d.date || today(), `min="${today()}"`)}
         <div class="field">
@@ -211,6 +220,7 @@ function render() {
       budget: s.budget,
       timeOnTaskMs: durationMs,
       delivery: v,
+      status: 'received',
     };
 
     update({

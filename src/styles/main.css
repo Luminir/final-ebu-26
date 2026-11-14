@@ -3,16 +3,18 @@
   --surface:#ffffff;
   --surface-2:#f3f7f2;
   --surface-warm:#faf7f0;
-  --text:#23352f;
-  --muted:#607069;
-  --line:#dde4dc;
-  --green:#29533e;
-  --green-2:#3f6d55;
-  --green-soft:#eef5ef;
-  --accent:#b98f57;
+  --text:#1c2d26;
+  --muted:#576b62;
+  --line:#dde5de;
+  --green:#1b4d37;
+  --green-2:#2a6349;
+  --green-soft:#eaf3ec;
+  --accent:#c68a3e;
+  --accent-gold:#d89843;
+  --gold-bright:#eeb34b;
   --danger:#b15345;
-  --shadow:0 12px 34px rgba(30,52,41,.08);
-  --shadow-sm:0 4px 14px rgba(30,52,41,.05);
+  --shadow:0 12px 34px rgba(27,77,55,.09);
+  --shadow-sm:0 4px 14px rgba(27,77,55,.06);
   --radius:20px;
   --font-sans:"Be Vietnam Pro","Segoe UI",Roboto,system-ui,-apple-system,sans-serif;
   --font-display:"Lora","Be Vietnam Pro","Segoe UI",serif;
@@ -183,7 +185,12 @@ a{text-decoration:none;color:inherit}
 .mini-tag{font-size:11.5px;padding:3px 8px;border-radius:8px;background:#fff;border:1px solid var(--line)}
 .mini-tag.owned{background:#edf6ee;border-color:#c2dec8;color:#27523b}
 .mini-tag.buying{background:#fff;border-color:#d5dfd6}
-.savings-pill{background:#eaf6ec;border:1px solid #bfe0c5;color:#255c34;border-radius:12px;padding:9px 12px;font-size:12.5px;margin-bottom:10px}
+.savings-pill{background:#fff9eb;border:1px solid #edd79b;color:#8d560c;border-radius:14px;padding:10px 14px;font-size:13px;margin-bottom:10px;font-weight:600;box-shadow:0 3px 10px rgba(212,163,80,0.14)}
+.savings-pill strong{color:#b35f00;font-size:14px}
+.prod-img{transition:transform .28s cubic-bezier(0.16,1,0.3,1)}
+.prod-svg-wrap:hover .prod-img{transform:scale(1.05)}
+.lunar-badge{display:inline-flex;align-items:center;gap:4px;background:#fff8e8;border:1px solid #f1d48c;color:#a06412;padding:2px 8px;border-radius:999px;font-size:11.5px;font-weight:700}
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-weight:700;font-size:12.5px}
 .summary-line{display:flex;justify-content:space-between;gap:14px;padding:6px 0}
 .summary-line strong:last-child{text-align:right}
 .summary-divider{height:1px;background:var(--line);margin:10px 0}

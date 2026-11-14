@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgG" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffff8"/><stop offset="100%" stop-color="#f5f3e4"/></radialGradient>
+    <linearGradient id="sack" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eed9b7"/><stop offset="100%" stop-color="#c9ab81"/></linearGradient>
+  </defs>
+  <rect width="300" height="240" rx="16" fill="url(#bgG)"/>
+  <!-- Sack shadow -->
+  <ellipse cx="150" cy="190" rx="65" ry="16" fill="rgba(0,0,0,0.1)"/>
+  <!-- Burlap sack -->
+  <path d="M100 110 C90 170 100 185 150 185 C200 185 210 170 200 110 C185 100 115 100 100 110 Z" fill="url(#sack)"/>
+  <!-- Top rice white surface -->
+  <ellipse cx="150" cy="110" rx="46" ry="16" fill="#fdfbf7" stroke="#e0cbab" stroke-width="2"/>
+  <!-- Rice grains details -->
+  <g fill="#e8ded1">
+    <ellipse cx="135" cy="108" rx="4" ry="2" transform="rotate(20 135 108)"/>
+    <ellipse cx="152" cy="106" rx="4" ry="2" transform="rotate(-15 152 106)"/>
+    <ellipse cx="165" cy="112" rx="4" ry="2" transform="rotate(45 165 112)"/>
+    <ellipse cx="142" cy="115" rx="4" ry="2"/>
+  </g>
+  <!-- Sack Label -->
+  <rect x="115" y="130" width="70" height="34" rx="4" fill="#a44238"/>
+  <text x="150" y="146" font-family="'Be Vietnam Pro',sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">GẠO NẾP</text>
+  <text x="150" y="158" font-family="'Be Vietnam Pro',sans-serif" font-size="8" fill="#ffd56b" text-anchor="middle">Cái Hoa Vàng 1kg</text>
+  <text x="150" y="228" font-family="'Be Vietnam Pro',sans-serif" font-size="12" font-weight="700" fill="#2d4a3e" text-anchor="middle">Gạo Nếp Cái Hoa Vàng Dâng Lễ</text>
+</svg>

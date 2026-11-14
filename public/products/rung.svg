@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgR" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff8fa"/><stop offset="100%" stop-color="#f8e1ec"/></radialGradient>
+    <linearGradient id="box" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d81b60"/><stop offset="100%" stop-color="#880e4f"/></linearGradient>
+    <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#f57f17"/></linearGradient>
+  </defs>
+  <rect width="300" height="240" rx="16" fill="url(#bgR)"/>
+  <!-- Shadow & Gift Box -->
+  <ellipse cx="150" cy="185" rx="70" ry="16" fill="rgba(0,0,0,0.12)"/>
+  <rect x="95" y="95" width="110" height="80" rx="8" fill="url(#box)"/>
+  <rect x="90" y="85" width="120" height="20" rx="6" fill="#ad1457"/>
+  <!-- Gold Ribbon -->
+  <rect x="142" y="85" width="16" height="90" fill="url(#goldRibbon)"/>
+  <!-- Ribbon Bow -->
+  <ellipse cx="135" cy="80" rx="14" ry="8" fill="url(#goldRibbon)" transform="rotate(-25 135 80)"/>
+  <ellipse cx="165" cy="80" rx="14" ry="8" fill="url(#goldRibbon)" transform="rotate(25 165 80)"/>
+  <circle cx="150" cy="82" r="6" fill="#ffd54f"/>
+  <text x="150" y="228" font-family="'Be Vietnam Pro',sans-serif" font-size="12" font-weight="700" fill="#2d4a3e" text-anchor="middle">Hộp Bánh Kẹo Hạt Sen Dâng Lễ Trang Trọng</text>
+</svg>

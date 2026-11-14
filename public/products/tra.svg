@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgTrM" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fafdf8"/><stop offset="100%" stop-color="#e5f2de"/></radialGradient>
+    <linearGradient id="teaPack" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4caf50"/><stop offset="100%" stop-color="#1b5e20"/></linearGradient>
+  </defs>
+  <rect width="300" height="240" rx="16" fill="url(#bgTrM)"/>
+  <!-- Shadow & Tea Pack -->
+  <ellipse cx="150" cy="185" rx="60" ry="14" fill="rgba(0,0,0,0.1)"/>
+  <rect x="110" y="85" width="80" height="95" rx="6" fill="url(#teaPack)"/>
+  <!-- Gold Label -->
+  <rect x="120" y="105" width="60" height="50" rx="4" fill="#ffd54f" stroke="#b78103"/>
+  <text x="150" y="125" font-family="'Be Vietnam Pro',sans-serif" font-size="10" font-weight="700" fill="#1b5e20" text-anchor="middle">TRÀ SEN</text>
+  <text x="150" y="140" font-family="'Be Vietnam Pro',sans-serif" font-size="8" fill="#333" text-anchor="middle">Thái Nguyên</text>
+  <!-- Fresh Tea Leaves on side -->
+  <path d="M85 175 C70 160 90 145 105 160 C95 175 88 175 85 175 Z" fill="#2e7d32"/>
+  <path d="M215 175 C230 160 210 145 195 160 C205 175 212 175 215 175 Z" fill="#2e7d32"/>
+  <text x="150" y="228" font-family="'Be Vietnam Pro',sans-serif" font-size="12" font-weight="700" fill="#2d4a3e" text-anchor="middle">Gói Trà Xanh Búp Tân Cương Thái Nguyên 100g</text>
+</svg>

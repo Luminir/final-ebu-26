@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgRu" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f9fbf9"/><stop offset="100%" stop-color="#e2eee4"/></radialGradient>
+    <linearGradient id="ceramic" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffffff"/><stop offset="50%" stop-color="#f1f2f6"/><stop offset="100%" stop-color="#ced6e0"/></linearGradient>
+  </defs>
+  <rect width="300" height="240" rx="16" fill="url(#bgRu)"/>
+  <!-- Wooden tray -->
+  <ellipse cx="150" cy="185" rx="80" ry="18" fill="rgba(0,0,0,0.1)"/>
+  <ellipse cx="150" cy="180" rx="75" ry="14" fill="#a0522d"/>
+  <!-- Traditional Wine Decanter Bottle -->
+  <path d="M125 170 C120 135 135 115 140 90 L140 70 L160 70 L160 90 C165 115 180 135 175 170 Z" fill="url(#ceramic)" stroke="#bdc3c7"/>
+  <!-- Red Silk Stopper -->
+  <ellipse cx="150" cy="70" rx="10" ry="4" fill="#e74c3c"/>
+  <path d="M145 70 Q150 55 155 70 Z" fill="#c0392b"/>
+  <!-- 3 Small Cups -->
+  <path d="M95 172 C95 182 110 182 110 172 Z" fill="#ffffff" stroke="#bdc3c7"/>
+  <path d="M145 178 C145 188 160 188 160 178 Z" fill="#ffffff" stroke="#bdc3c7"/>
+  <path d="M190 172 C190 182 205 182 205 172 Z" fill="#ffffff" stroke="#bdc3c7"/>
+  <text x="150" y="228" font-family="'Be Vietnam Pro',sans-serif" font-size="12" font-weight="700" fill="#2d4a3e" text-anchor="middle">Bình Rượu Nếp Cái Hoa Vàng &amp; 3 Chén Sứ</text>
+</svg>

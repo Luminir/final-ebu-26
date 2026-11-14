@@ -15,6 +15,16 @@ function loadFromDB() {
   const feedback = KinhTamDB.getTable('feedback') || [];
   const logList = KinhTamDB.getTable('analytics') || [];
 
+  let currentUser = null;
+  try {
+    if (typeof localStorage !== 'undefined') {
+      const savedUser = localStorage.getItem('kt_auth_user');
+      if (savedUser) currentUser = JSON.parse(savedUser);
+    }
+  } catch {
+    currentUser = null;
+  }
+
   state = {
     occasion: draft.occasion || 'ram',
     mode: draft.mode || 'gon',
@@ -31,6 +41,7 @@ function loadFromDB() {
     history,
     feedback,
     log: logList,
+    currentUser,
   };
 }
 
@@ -134,7 +145,74 @@ export function applyScenario(code) {
   }
 }
 
+export const ORDER_STATUS_FLOW = ['received', 'preparing', 'shipping', 'completed'];
+
+export const ORDER_STATUS_LABELS = {
+  received: { label: 'Đã tiếp nhận', icon: '📝', color: '#1565c0', bg: '#e3f2fd', desc: 'Đơn hàng đã được hệ thống Kính Tâm ghi nhận' },
+  preparing: { label: 'Đang chuẩn bị lễ vật', icon: '🧺', color: '#b78103', bg: '#fff8e1', desc: 'Đội ngũ Kính Tâm đang tuyển chọn hoa tươi và đóng gói lễ vật' },
+  shipping: { label: 'Đang giao hàng', icon: '🚚', color: '#6a1b9a', bg: '#f3e5f5', desc: 'Shipper đang trên đường giao tới gia đình bạn' },
+  completed: { label: 'Đã hoàn tất', icon: '✅', color: '#2e7d32', bg: '#e8f5e9', desc: 'Lễ vật đã được bàn giao trọn vẹn và trang nghiêm' },
+};
+
+export function loginUser(user) {
+  const u = {
+    id: user.id || 'usr_' + Date.now(),
+    name: user.name || 'Nguyễn Văn A',
+    email: user.email || 'nguyenvana@gmail.com',
+    phone: user.phone || '0912345678',
+    address: user.address || 'Số 15 ngõ 68 Triều Khúc, Thanh Xuân, Hà Nội',
+    loggedInAt: new Date().toISOString(),
+  };
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('kt_auth_user', JSON.stringify(u));
+    }
+  } catch { /* ignore */ }
+  update((s) => ({
+    currentUser: u,
+    profile: {
+      ...s.profile,
+      displayName: u.name,
+      defaultDistrict: u.address,
+    },
+  }));
+  log('user_logged_in', { email: u.email });
+  return u;
+}
+
+export function logoutUser() {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('kt_auth_user');
+    }
+  } catch { /* ignore */ }
+  update({ currentUser: null });
+  log('user_logged_out');
+}
+
+export function updateOrderStatus(orderId, status) {
+  update((s) => ({
+    history: (s.history || []).map((o) => (o.id === orderId ? { ...o, status } : o)),
+  }));
+  log('order_status_updated', { orderId, status });
+}
+
+export function nextOrderStatus(orderId) {
+  const order = (state.history || []).find((o) => o.id === orderId);
+  if (!order) return;
+  const current = order.status || 'received';
+  const idx = ORDER_STATUS_FLOW.indexOf(current);
+  const next = ORDER_STATUS_FLOW[(idx + 1) % ORDER_STATUS_FLOW.length];
+  updateOrderStatus(orderId, next);
+  return next;
+}
+
 export function resetAll() {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('kt_auth_user');
+    }
+  } catch { /* ignore */ }
   KinhTamDB.wipePersonalData();
   loadFromDB();
   listeners.forEach((fn) => fn(state));

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgX" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff8f5"/><stop offset="100%" stop-color="#fae0d7"/></radialGradient>
+    <radialGradient id="gac" cx="40%" cy="40%" r="65%"><stop offset="0%" stop-color="#ff5722"/><stop offset="60%" stop-color="#e64a19"/><stop offset="100%" stop-color="#bf360c"/></radialGradient>
+    <linearGradient id="plateX" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#e0e0e0"/></linearGradient>
+  </defs>
+  <rect width="300" height="240" rx="16" fill="url(#bgX)"/>
+  <!-- Plate -->
+  <ellipse cx="150" cy="185" rx="85" ry="22" fill="rgba(0,0,0,0.12)"/>
+  <ellipse cx="150" cy="180" rx="80" ry="18" fill="url(#plateX)" stroke="#dcdde1" stroke-width="2"/>
+  <!-- Molded Red Sticky Rice -->
+  <path d="M100 145 C100 110 200 110 200 145 C200 165 100 165 100 145 Z" fill="url(#gac)"/>
+  <ellipse cx="150" cy="140" rx="46" ry="18" fill="#e64a19"/>
+  <!-- Rice texture & sesame seeds -->
+  <g fill="#ffe082" opacity="0.9">
+    <circle cx="130" cy="138" r="1.5"/><circle cx="145" cy="132" r="1.5"/><circle cx="160" cy="135" r="1.5"/>
+    <circle cx="140" cy="144" r="1.5"/><circle cx="155" cy="142" r="1.5"/><circle cx="170" cy="140" r="1.5"/>
+  </g>
+  <!-- Embossed "Phúc" Character Badge in Center -->
+  <circle cx="150" cy="138" r="14" fill="#ffd54f" stroke="#b78103" stroke-width="1.5"/>
+  <text x="150" y="143" font-family="'Lora',serif" font-size="13" font-weight="700" fill="#b71c1c" text-anchor="middle">福</text>
+  <text x="150" y="228" font-family="'Be Vietnam Pro',sans-serif" font-size="12" font-weight="700" fill="#2d4a3e" text-anchor="middle">Đĩa Xôi Gấc Khuôn Hoa Chữ Phúc Giao Ấm</text>
+</svg>

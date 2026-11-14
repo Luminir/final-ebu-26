@@ -13,6 +13,7 @@ export const categories = [
 export const products = [
   {
     id: 'hoa',
+    image: '/products/hoa.jpg',
     emoji: '🌸',
     name: 'Hoa cúng tươi',
     price: 70000,
@@ -30,6 +31,7 @@ export const products = [
   },
   {
     id: 'nhang',
+    image: '/products/nhang.jpg',
     emoji: '🪔',
     name: 'Nhang thơm thảo mộc',
     price: 30000,
@@ -47,6 +49,7 @@ export const products = [
   },
   {
     id: 'trai',
+    image: '/products/trai.jpg',
     emoji: '🍎',
     name: 'Trái cây ngũ quả',
     price: 95000,
@@ -64,6 +67,7 @@ export const products = [
   },
   {
     id: 'nen',
+    image: '/products/nen.jpg',
     emoji: '🕯️',
     name: 'Nến đỏ an toàn',
     price: 25000,
@@ -81,6 +85,7 @@ export const products = [
   },
   {
     id: 'gao',
+    image: '/products/gao.jpg',
     emoji: '🌾',
     name: 'Gạo thơm dâng lễ',
     price: 28000,
@@ -98,6 +103,7 @@ export const products = [
   },
   {
     id: 'muoi',
+    image: '/products/muoi.jpg',
     emoji: '🧂',
     name: 'Muối hạt sạch',
     price: 12000,
@@ -115,6 +121,7 @@ export const products = [
   },
   {
     id: 'xoi',
+    image: '/products/xoi.jpg',
     emoji: '🍚',
     name: 'Xôi gấc khuôn hoa',
     price: 65000,
@@ -132,6 +139,7 @@ export const products = [
   },
   {
     id: 'che',
+    image: '/products/che.jpg',
     emoji: '🥣',
     name: 'Chè đậu thanh ngọt',
     price: 55000,
@@ -149,6 +157,7 @@ export const products = [
   },
   {
     id: 'ga',
+    image: '/products/ga.jpg',
     emoji: '🍗',
     name: 'Gà luộc nguyên con',
     price: 190000,
@@ -166,6 +175,7 @@ export const products = [
   },
   {
     id: 'rung',
+    image: '/products/rung.jpg',
     emoji: '🍬',
     name: 'Bánh kẹo dâng lễ',
     price: 60000,
@@ -183,6 +193,7 @@ export const products = [
   },
   {
     id: 'ruou',
+    image: '/products/ruou.jpg',
     emoji: '🍶',
     name: 'Rượu nếp / Nước tinh khiết',
     price: 45000,
@@ -200,6 +211,7 @@ export const products = [
   },
   {
     id: 'tra',
+    image: '/products/tra.jpg',
     emoji: '🍵',
     name: 'Trà mạn Thái Nguyên',
     price: 40000,
@@ -217,6 +229,7 @@ export const products = [
   },
   {
     id: 'vang',
+    image: '/products/vang.jpg',
     emoji: '📜',
     name: 'Bộ vàng mã cơ bản',
     price: 35000,
@@ -234,6 +247,7 @@ export const products = [
   },
   {
     id: 'banh',
+    image: '/products/banh.jpg',
     emoji: '🥮',
     name: 'Bánh đậu xanh / Bánh ngọt',
     price: 80000,
@@ -248,6 +262,7 @@ export const products = [
     origin: 'Chưa xác minh (dữ liệu mẫu)',
     desc: 'Hộp bánh truyền thống dùng thêm cho mâm lễ Rằm lớn hoặc biếu ông bà.',
     occasions: ['ram', 'gio'],
+    image: '/products/banh.jpg',
   },
 ];
 

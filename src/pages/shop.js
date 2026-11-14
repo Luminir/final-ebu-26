@@ -43,9 +43,17 @@ function step1(s) {
           ([id, o]) => `
         <button type="button" class="card occasion-card ${s.occasion === id ? 'active' : ''}" data-occ="${id}">
           <div>
-            <div class="icon">${o.emoji}</div>
-            <h3>${esc(o.shortName || o.name)}</h3>
-            <p>${esc(o.desc)}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <span class="icon" style="font-size:26px">${o.emoji}</span>
+              <span class="lunar-badge" style="background:#fff8e8;border:1px solid #f1d48c;color:#a06412;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700">
+                ${id === 'ram' ? '15 Âm lịch' : id === 'mung1' ? '01 Âm lịch' : id === 'gio' ? 'Lịch Âm giỗ' : 'Ngày hoàng đạo'}
+              </span>
+            </div>
+            <h3 style="margin:4px 0">${esc(o.shortName || o.name)}</h3>
+            <div class="muted" style="font-size:12px;color:var(--green);font-weight:600;margin-bottom:4px">
+              📅 ${id === 'ram' ? 'Chu kỳ 15 Âm lịch hàng tháng' : id === 'mung1' ? 'Khởi đầu ngày 01 Âm lịch' : id === 'gio' ? 'Tính theo lịch Âm truyền thống' : 'Tra cứu ngày tốt nhập trạch'}
+            </div>
+            <p style="margin:0;font-size:13px">${esc(o.desc)}</p>
           </div>
         </button>`
         )

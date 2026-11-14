@@ -64,8 +64,8 @@ export function mountLayout(active) {
         ${links.map(([k, href, t]) => `<a href="${href}" class="${k === active ? 'active' : ''}">${t}</a>`).join('')}
       </nav>
       <div class="actions-head">
-        <a class="iconbtn" href="tai-khoan.html" title="Đơn đã lưu" aria-label="Đơn đã lưu">
-          👤 <span class="hide-sm">Đơn hàng</span>
+        <a class="iconbtn" id="headUserBtn" href="tai-khoan.html" title="Tài khoản & Đơn hàng" aria-label="Tài khoản & Đơn hàng">
+          👤 <span class="hide-sm" id="headUserLabel">Tài khoản</span>
         </a>
         <a class="iconbtn cart-btn" href="gio-hang.html" aria-label="Giỏ hàng">
           🛒 <span class="badge" id="cartBadge">0</span>
@@ -119,6 +119,12 @@ export function mountLayout(active) {
   const sync = () => {
     const b = document.getElementById('cartBadge');
     if (b) b.textContent = cartCount();
+    const uLabel = document.getElementById('headUserLabel');
+    if (uLabel) {
+      const u = getState().currentUser;
+      uLabel.textContent = u ? u.name.split(' ').slice(-1)[0] || u.name : 'Đăng nhập';
+      if (u) uLabel.title = `Đã đăng nhập: ${u.name}`;
+    }
   };
   sync();
   subscribe(sync);
@@ -152,9 +158,13 @@ export function openProductModal(id) {
 
   body.innerHTML = `
     <div class="modal-product-grid">
-      <div class="modal-visual" style="background:${p.tone}">
-        <div class="modal-emoji">${p.emoji}</div>
-        <span class="pill" style="background:#fff">${esc(p.tag)}</span>
+      <div class="modal-visual" style="background:${p.tone};padding:0;overflow:hidden;position:relative">
+        ${
+          p.image
+            ? `<img src="${p.image}" alt="${esc(p.name)}" style="width:100%;height:100%;object-fit:cover;display:block">`
+            : `<div class="modal-emoji">${p.emoji}</div>`
+        }
+        <span class="pill" style="background:#fff;position:absolute;bottom:12px;left:12px">${esc(p.tag)}</span>
       </div>
       <div>
         <h2 id="modalTitle" style="margin:0 0 6px;font:600 24px/1.3 var(--font-display)">${esc(p.name)}</h2>
